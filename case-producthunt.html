@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Publora × Product Hunt — #1 Product of the Day — imakarov.us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+<style>
+  body { background: #0A0A0A; }
+  .alive-nav{position:sticky;top:0;z-index:20;height:60px;padding:0 40px;
+    background:rgba(7,7,8,0.55);backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    display:flex;align-items:center;gap:24px}
+  .alive-mark{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:#EDEDED}
+  .alive-mark-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .alive-nav-links{margin-left:auto;display:flex;gap:22px;font-size:13px;color:#B4B4B4}
+  .alive-nav-links a{transition:color .15s}
+  .alive-nav-links a:hover{color:var(--accent)}
+  .alive-lang{display:flex;border:1px solid rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;font-family:var(--font-mono);font-size:11px}
+  .alive-lang button{padding:6px 10px;background:transparent;border:none;color:#7A7A7A;cursor:pointer;letter-spacing:.05em}
+  .alive-lang button.on{background:var(--accent);color:#070708}
+  @media (max-width: 860px){ .alive-nav-links{display:none} }
+</style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+// Product Hunt orange accent
+const accent = "oklch(0.68 0.19 40)";
+
+const useLang = () => {
+  const [lang, setLang] = React.useState(() => {
+    const u = new URLSearchParams(location.search).get("lang");
+    return u === "ru" ? "ru" : (localStorage.getItem("lang") === "ru" ? "ru" : "en");
+  });
+  React.useEffect(() => {
+    localStorage.setItem("lang", lang);
+    const u = new URL(location.href);
+    u.searchParams.set("lang", lang);
+    history.replaceState(null, "", u.toString());
+  }, [lang]);
+  return [lang, setLang];
+};
+
+const Section = ({ num, title, children }) => (
+  <section style={{ padding: "48px 32px", maxWidth: 980, margin: "0 auto", borderTop: "1px solid #1F1F1F" }}>
+    <div style={{ display: "flex", alignItems: "baseline", gap: 18, marginBottom: 28 }}>
+      <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: "0.05em" }}>{num}</span>
+      <h2 style={{ margin: 0, fontSize: 26, fontWeight: 500, letterSpacing: "-0.015em" }}>{title}</h2>
+    </div>
+    {children}
+  </section>
+);
+
+const P = ({ children, size = 16 }) => (
+  <p style={{ fontSize: size, lineHeight: 1.65, color: "#B4B4B4", maxWidth: 720, margin: "0 0 16px" }}>{children}</p>
+);
+
+const Card = ({ h, d }) => (
+  <div style={{ padding: 24, borderRadius: 10, background: "#0F0F0F", border: "1px solid #1F1F1F" }}>
+    <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 8 }}>{h}</div>
+    <div style={{ fontSize: 13.5, color: "#B4B4B4", lineHeight: 1.55 }}>{d}</div>
+  </div>
+);
+
+const Page = () => {
+  const [lang, setLang] = useLang();
+  const L = (en, ru) => (lang === "ru" ? ru : en);
+  const home = "index.html?lang=" + lang;
+
+  return (
+  <div style={{ minHeight: "100vh", background: "#0A0A0A", color: "#EDEDED", fontFamily: "var(--font-sans)", "--accent": accent }}>
+    {/* Standard site header */}
+    <nav className="alive-nav">
+      <a href={home} className="alive-mark"><span className="alive-mark-dot" />Ilya Makarov</a>
+      <span className="mono" style={{ fontSize: 11, color: "#525252" }}>cases/producthunt</span>
+      <div className="alive-nav-links">
+        <a href={home + "#competencies"}>{L("Expertise", "Экспертиза")}</a>
+        <a href={home + "#achievements"}>{L("Achievements", "Ачивменты")}</a>
+        <a href={home + "#companies"}>{L("Companies", "Компании")}</a>
+        <a href={home + "#independent"}>{L("Independent", "Свои аппы")}</a>
+        <a href={home + "#career"}>{L("Career", "Карьера")}</a>
+        <a href={home + "#communities"}>{L("Communities", "Сообщества")}</a>
+        <a href={home + "#contact"}>{L("Contact", "Контакт")}</a>
+      </div>
+      <div className="alive-lang">
+        <button onClick={() => setLang("en")} className={lang === "en" ? "on" : ""}>EN</button>
+        <button onClick={() => setLang("ru")} className={lang === "ru" ? "on" : ""}>RU</button>
+      </div>
+    </nav>
+
+    {/* Hero */}
+    <section style={{ padding: "96px 32px 64px", maxWidth: 980, margin: "0 auto" }}>
+      <div className="mono" style={{
+        display: "inline-flex", alignItems: "center", gap: 10,
+        fontSize: 11, color: accent, marginBottom: 28, letterSpacing: "0.05em",
+      }}>
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: accent }}></span>
+        {L("CASE STUDY · GO-TO-MARKET · JUNE 2026", "КЕЙС · GO-TO-MARKET · ИЮНЬ 2026")}
+      </div>
+      <h1 style={{ margin: 0, fontSize: 64, fontWeight: 500, letterSpacing: "-0.035em", lineHeight: 1.05, marginBottom: 24 }}>
+        Publora × Product Hunt:<br />
+        <span style={{ color: accent }}>#1 Product of the Day</span>
+      </h1>
+      <p style={{ fontSize: 22, lineHeight: 1.45, color: "#B4B4B4", margin: 0, maxWidth: 680, textWrap: "pretty" }}>
+        {L(
+          "Two weeks of preparation, a hand-built support base, and a launch day that came down to a neck-and-neck race — how Publora took the top spot on Product Hunt on June 10, 2026.",
+          "Две недели подготовки, собранная вручную база поддержки и день запуска, превратившийся в гонку «нос к носу» — как Publora взяла первое место на Product Hunt 10 июня 2026."
+        )}
+      </p>
+    </section>
+
+    {/* Hero visual */}
+    <section style={{ padding: "0 32px 32px", maxWidth: 980, margin: "0 auto" }}>
+      <img src="assets/thumb-producthunt.jpg" alt="Publora — We've just launched on Product Hunt"
+        style={{ width: "100%", borderRadius: 14, border: "1px solid #1F1F1F", display: "block" }} />
+    </section>
+
+    {/* Stats strip */}
+    <section style={{ padding: "16px 32px 48px", maxWidth: 980, margin: "0 auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+        {[
+          ["#1", L("Product of the Day", "Product of the Day")],
+          ["~1,000", L("site visits in one day", "переходов на сайт за день")],
+          ["~50", L("new signups", "новых регистраций")],
+          ["2,000+", L("direct messages sent", "личных сообщений")],
+        ].map(([v, k]) => (
+          <div key={k} style={{ padding: "24px 20px", borderRadius: 10, background: "#0F0F0F", border: "1px solid #1F1F1F", textAlign: "center" }}>
+            <div style={{ fontSize: 32, fontWeight: 500, color: accent, letterSpacing: "-0.02em" }}>{v}</div>
+            <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginTop: 8, letterSpacing: "0.03em" }}>{k}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <Section num="01" title={L("What is Publora", "Что такое Publora")}>
+      <P>
+        <a href="https://publora.com" target="_blank" rel="noopener" style={{ color: accent }}>Publora</a>{" "}
+        {L(
+          "is the publishing API for the agent era — an API / MCP server that lets AI agents (Claude Code, Cursor, Codex) post, comment, and react across social networks: LinkedIn, X, YouTube, Threads, Facebook, and more.",
+          "— publishing API эпохи агентов: API / MCP-сервер, через который AI-агенты (Claude Code, Cursor, Codex) постят, комментируют и ставят реакции в соцсетях: LinkedIn, X, YouTube, Threads, Facebook и других."
+        )}
+      </P>
+      <P>
+        {L(
+          "Shipping a product is half the job. Getting people to know it exists is the other half — and Product Hunt is still the default arena for that.",
+          "Сделать продукт — половина дела. Вторая половина — чтобы о нём узнали. И Product Hunt по-прежнему главная арена для этого."
+        )}
+      </P>
+    </Section>
+
+    <Section num="02" title={L("A launch is a project, not a post", "Запуск — это проект, а не пост")}>
+      <P>
+        {L(
+          "A Product Hunt launch is not a marketing announcement — it is a standalone project. Typical preparation runs from two weeks to two months. There is a whole culture around it: hunters who announce products, karma attached to every account (since 2025, votes from fresh zero-karma accounts count for nothing), and outreach as the single highest-leverage activity.",
+          "Запуск на Product Hunt — не маркетинговый анонс, а полноценный отдельный проект. Подготовка обычно занимает от двух недель до двух месяцев. Вокруг — целая культура: хантеры, которые анонсируют продукты, карма у каждого аккаунта (с 2025 года голоса свежих аккаунтов с нулевой кармой не дают ничего) и аутрич как самый эффективный инструмент."
+        )}
+      </P>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+        <Card h={L("Karma over volume", "Карма важнее количества")} d={L("What matters is points, not raw votes. Support from established Product Hunt profiles is worth multiples of a new account's vote.", "Важны очки, а не голоса. Поддержка прокачанного профиля Product Hunt стоит в разы больше голоса новорега.")} />
+        <Card h={L("Outreach is the engine", "Аутрич — двигатель запуска")} d={L("Email, Twitter, Telegram, LinkedIn — the stronger your Product Hunt profile and network, the better the launch.", "Почта, Twitter, Telegram, LinkedIn — чем сильнее профиль на Product Hunt и сеть контактов, тем лучше запуск.")} />
+        <Card h={L("Learn from winners", "Учиться у победителей")} d={L("Collected private playbooks from founders who took Product of the Day and Product of the Week earlier in 2026.", "Собрал закрытые гайды от фаундеров, бравших Product of the Day и Product of the Week в 2026 году.")} />
+        <Card h={L("Two weeks of prep", "Две недели подготовки")} d={L("Contact collection, hunter conversations, comments, posts — a full-time workstream before launch day.", "Сбор контактов, общение с хантерами, комменты, посты — полноценный рабочий поток до дня запуска.")} />
+      </div>
+    </Section>
+
+    <Section num="03" title={L("Building the support base", "Сбор базы поддержки")}>
+      <P>
+        {L(
+          "The goal: reach people with strong Product Hunt profiles — recent makers and active users of the platform. Two cohorts, two pipelines:",
+          "Цель: дотянуться до людей с прокачанными профилями Product Hunt — недавних мейкеров и активных пользователей платформы. Две когорты, два пайплайна:"
+        )}
+      </P>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginBottom: 16 }}>
+        <Card h={L("Cohort 1 — recent makers", "Когорта 1 — недавние мейкеры")} d={L("Parsed the top-3 products for every day of the previous 90 days and collected their makers' LinkedIn profiles — roughly 20–25% had one.", "Спарсил топ-3 продукта за каждый день последних 90 дней и собрал LinkedIn их мейкеров — профиль был примерно у 20–25%.")} />
+        <Card h={L("Cohort 2 — active hunters", "Когорта 2 — активные пользователи")} d={L("Went through 500 active Product Hunt users via the Hunted Space dashboard and collected contacts — around 10–15% conversion to a usable profile.", "Прошёлся по 500 активным пользователям Product Hunt через дашборд Hunted Space и собрал контакты — конверсия в рабочий профиль около 10–15%.")} />
+      </div>
+      <P>
+        {L(
+          "The messy part was parsing: LinkedIn is locked down hard and Product Hunt sits behind Cloudflare. It took two iterations — first collecting profiles from Hunted Space, then pulling LinkedIn links straight from personal Product Hunt pages using the Claude browser plugin.",
+          "Самая замороченная часть — парсинг: LinkedIn закрыт жёстко, а Product Hunt сидит за Cloudflare. Понадобилось две итерации: сначала собрал профили с Hunted Space, потом вытаскивал LinkedIn прямо с личных страниц на Product Hunt через плагин Claude в браузере."
+        )}
+      </P>
+    </Section>
+
+    <Section num="04" title={L("The toolstack", "Инструменты")}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+        <Card h="CRMChat" d={<span>{L("Telegram-native CRM and outreach platform — powered the direct-message campaign, the launch's best-performing channel. ", "Telegram-CRM и платформа аутрича — на ней держалась кампания личных сообщений, лучший канал запуска. ")}<a href="https://crmchat.ai/" target="_blank" rel="noopener" style={{ color: accent }}>crmchat.ai</a></span>} />
+        <Card h="Metalfred" d={L("LinkedIn outreach automation — simple message to recent makers and active PH users: 'we're launching, support us'.", "Автоматизация аутрича в LinkedIn — простое сообщение недавним мейкерам и активным пользователям PH: «мы запускаемся, поддержите».")} />
+        <Card h="Hunted Space" d={L("Dashboard for discovering active Product Hunt users — source of the second cohort.", "Дашборд для поиска активных пользователей Product Hunt — источник второй когорты.")} />
+        <Card h={L("Claude browser plugin", "Плагин Claude в браузере")} d={L("Extracted LinkedIn profiles directly from Product Hunt personal pages, bypassing parsing walls.", "Вытаскивал LinkedIn-профили прямо с личных страниц Product Hunt, обходя защиту от парсинга.")} />
+      </div>
+    </Section>
+
+    <Section num="05" title={L("Launch day — June 10, 2026", "День запуска — 10 июня 2026")}>
+      <P>
+        {L(
+          "The most intense stretch: hours of running neck-and-neck with a competitor for the top spot, watching the points update in real time. By the end of the day Publora held #1 — Product of the Day.",
+          "Самый напряжённый отрезок: несколько часов гонки «нос к носу» с конкурентом за первое место, глядя на обновление баллов в реальном времени. К концу дня Publora удержала #1 — Product of the Day."
+        )}
+      </P>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "start" }}>
+        <video src="assets/publora-timelapse.mp4" autoPlay loop muted playsInline
+          style={{ width: "100%", borderRadius: 10, border: "1px solid #1F1F1F", display: "block" }} />
+        <div>
+          <P size={15}>
+            {L("Channels used on launch day, ranked by how well they worked:", "Каналы дня запуска — по эффективности:")}
+          </P>
+          <ol style={{ fontSize: 15, lineHeight: 1.9, color: "#B4B4B4", margin: 0, paddingLeft: 20 }}>
+            <li>{L("Personal Telegram messages — ", "Личные сообщения в Telegram — ")}<span style={{ color: accent }}>{L("best channel", "лучший канал")}</span></li>
+            <li>{L("Email blast to existing Publora users", "Email-рассылка по пользователям Publora")}</li>
+            <li>{L("LinkedIn outreach to recent Product Hunt makers", "LinkedIn-аутрич по недавним мейкерам Product Hunt")}</li>
+            <li>{L("Professional Telegram communities", "Профессиональные Telegram-сообщества")}</li>
+            <li>{L("Product Hunt support groups — ", "Группы взаимной поддержки Product Hunt — ")}<span style={{ color: "#7A7A7A" }}>{L("lowest conversion", "худшая конверсия")}</span></li>
+          </ol>
+          <p className="mono" style={{ fontSize: 11, color: "#525252", marginTop: 20, letterSpacing: "0.03em" }}>
+            {L("← points race timelapse, built with Claude Code", "← таймлапс гонки баллов, собран с Claude Code")}
+          </p>
+        </div>
+      </div>
+    </Section>
+
+    <Section num="06" title={L("What the launch delivered", "Что дал запуск")}>
+      <P>
+        {L(
+          "Roughly 1,000 site visits in a single day, about 50 new registrations, and — through 2,000+ direct messages — 2,000 people who got their first touch with the product. Plus the Product of the Day badge now sitting on the site.",
+          "Порядка 1 000 переходов на сайт за день, около 50 новых регистраций и — через 2 000+ личных сообщений — 2 000 людей, получивших первое касание с продуктом. Плюс бейдж Product of the Day, который теперь стоит на сайте."
+        )}
+      </P>
+      <P>
+        {L("Next target: Product of the Week.", "Следующая цель: Product of the Week.")}
+      </P>
+      <div className="mono" style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px 24px", fontSize: 13, color: "#B4B4B4", marginTop: 24 }}>
+        <span style={{ color: "#525252" }}>{L("result", "результат")}</span><span style={{ color: accent }}>● #1 Product of the Day</span>
+        <span style={{ color: "#525252" }}>{L("launch", "запуск")}</span><span>{L("June 10, 2026", "10 июня 2026")}</span>
+        <span style={{ color: "#525252" }}>{L("product", "продукт")}</span><span><a href="https://publora.com" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>publora.com</a></span>
+        <span style={{ color: "#525252" }}>{L("ph page", "стр. на PH")}</span><span><a href="https://www.producthunt.com/products/publora?launch=publora-2" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>producthunt.com/products/publora</a></span>
+        <span style={{ color: "#525252" }}>{L("story", "история")}</span><span>
+          <a href="https://t.me/makarov_way/376" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>{L("prep", "подготовка")}</a> ·{" "}
+          <a href="https://t.me/makarov_way/378" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>{L("outreach base", "база аутрича")}</a> ·{" "}
+          <a href="https://t.me/makarov_way/382" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>{L("launch day", "день запуска")}</a> ·{" "}
+          <a href="https://t.me/makarov_way/383" target="_blank" rel="noopener" style={{ color: "#B4B4B4" }}>{L("results", "итоги")}</a>
+        </span>
+      </div>
+    </Section>
+
+    {/* Footer */}
+    <footer className="mono" style={{
+      padding: "32px", borderTop: "1px solid #1F1F1F",
+      display: "flex", justifyContent: "space-between",
+      fontSize: 11, color: "#525252", maxWidth: 980, margin: "0 auto",
+    }}>
+      <a href={home}>{L("← Back to hub", "← На главную")}</a>
+      <span>© 2026 imakarov.us</span>
+    </footer>
+  </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Page />);
+</script>
+</body>
+</html>

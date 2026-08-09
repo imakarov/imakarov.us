@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ilya Makarov — imakarov.us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+<meta name="ext-resource-dependency" content="assets/portrait.jpg" data-resource-id="portrait" />
+<meta name="ext-resource-dependency" content="assets/logo-cscart.png" data-resource-id="logoCscart" />
+<meta name="ext-resource-dependency" content="assets/logo-coactor.png" data-resource-id="logoCoactor" />
+<meta name="ext-resource-dependency" content="assets/logo-smartranking.png" data-resource-id="logoSmartranking" />
+<meta name="ext-resource-dependency" content="assets/logo-1clue.png" data-resource-id="logo1clue" />
+<template id="__bundler_thumbnail" data-bg-color="#070708">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#070708"/>
+    <text x="600" y="430" font-family="serif" font-size="180" font-style="italic" fill="#7C9BFF" text-anchor="middle">im</text>
+  </svg>
+</template>
+<meta name="ext-resource-dependency" content="assets/logo-cscart.png" data-resource-id="logoCscart" />
+<meta name="ext-resource-dependency" content="assets/logo-coactor.png" data-resource-id="logoCoactor" />
+<meta name="ext-resource-dependency" content="assets/logo-smartranking.png" data-resource-id="logoSmartranking" />
+<meta name="ext-resource-dependency" content="assets/logo-1clue.png" data-resource-id="logo1clue" />
+<style>
+  body { background: #070708; }
+</style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/site.js?v=20260716-6"></script>
+<script src="image-slot.js?v=20260716-6"></script>
+<script type="text/babel" src="tweaks-panel.jsx?v=20260716-6"></script>
+<script type="text/babel" src="directions/alive.jsx?v=20260716-6"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "indigo-magenta",
+  "cubes": true
+}/*EDITMODE-END*/;
+window.__TWEAK_DEFAULTS = TWEAK_DEFAULTS;
+ReactDOM.createRoot(document.getElementById("root")).render(<window.ALIVE />);
+</script>
+</body>
+</html>

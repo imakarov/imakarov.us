@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>imakarov.us — Hub (3 directions)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css" />
+<style>
+  html, body { background: #f0eee9; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/site.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="directions/A-terminal.jsx"></script>
+<script type="text/babel" src="directions/B-editorial.jsx"></script>
+<script type="text/babel" src="directions/C-grid.jsx"></script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+const App = () => (
+  <DesignCanvas>
+    <DCSection
+      id="hub"
+      title="imakarov.us — three directions"
+      subtitle="Dark · modern tech · click any artboard to open fullscreen (Esc to exit)"
+    >
+      <DCArtboard id="A" label="A · Terminal" width={1280} height={1900}>
+        <TermA />
+      </DCArtboard>
+      <DCArtboard id="B" label="B · Editorial" width={1280} height={2100}>
+        <EditorialB />
+      </DCArtboard>
+      <DCArtboard id="C" label="C · Grid Index" width={1280} height={2000}>
+        <GridC />
+      </DCArtboard>
+    </DCSection>
+  </DesignCanvas>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+// Fit-to-content on mount — overrides any stale saved viewport so the
+// 3 artboards always land centered in view on first load.
+function fitToArtboards() {
+  const slots = document.querySelectorAll('[data-dc-slot]');
+  if (slots.length === 0) return false;
+  const world = document.querySelector('[ref], .design-canvas > div:nth-child(1)') ||
+                document.querySelector('.design-canvas')?.firstElementChild;
+  if (!world) return false;
+
+  // Reset transform first so we measure layout-space positions
+  const prev = world.style.transform;
+  world.style.transform = "translate3d(0,0,0) scale(1)";
+  let minX=Infinity, minY=Infinity, maxX=-Infinity, maxY=-Infinity;
+  slots.forEach(s => {
+    const r = s.getBoundingClientRect();
+    minX = Math.min(minX, r.left);
+    minY = Math.min(minY, r.top);
+    maxX = Math.max(maxX, r.right);
+    maxY = Math.max(maxY, r.bottom);
+  });
+  // Include section header above first artboard
+  const sec = document.querySelector('[data-dc-section]');
+  if (sec) {
+    const r = sec.getBoundingClientRect();
+    minX = Math.min(minX, r.left);
+    minY = Math.min(minY, r.top);
+  }
+  const contentW = maxX - minX, contentH = maxY - minY;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const padding = 80;
+  const scale = Math.min((vw - padding * 2) / contentW, (vh - padding * 2) / contentH, 1);
+  // Centre the content
+  const tx = (vw - contentW * scale) / 2 - minX * scale;
+  const ty = (vh - contentH * scale) / 2 - minY * scale;
+  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
+  world.style.setProperty('--dc-inv-zoom', String(1 / scale));
+  // Persist so canvas's own state matches what we just set
+  try {
+    localStorage.setItem('dc-viewport:' + location.pathname, JSON.stringify({ x: tx, y: ty, scale }));
+  } catch {}
+  return true;
+}
+
+// Try a few times — artboards mount async
+let tries = 0;
+const fitTimer = setInterval(() => {
+  if (fitToArtboards() || ++tries > 20) clearInterval(fitTimer);
+}, 100);
+</script>
+</body>
+</html>

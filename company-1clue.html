@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1CLue Puzzles · Ilya Makarov</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+<style>body{background:#070708}</style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data/site.js?v=20260716-6"></script>
+<script src="image-slot.js?v=20260716-6"></script>
+<script type="text/babel" src="directions/company-page.jsx?v=20260716-6"></script>
+<script type="text/babel">
+const onclueContent = {
+  headline: { v: "9", kEN: "Logic & word puzzle prototypes launched — the 4 flagship games are below", kRU: "Запущено прототипов логических и словесных пазлов — ниже 4 флагманские игры" },
+  sections: {
+    en: [
+      { key: "Studio",
+        body: "1CLue Puzzles is a mobile game studio focused on word and logic puzzles. Innovation through rapid prototyping and trend integration.",
+      },
+      { key: "Strategy",
+        body: "Focus on logic and word puzzles. Implement existing trending UX mechanics. High volume of innovative ideas. Longtail game design strategy. Rapid viability test.",
+      },
+      { key: "Workflow",
+        body: "Idea → market and competitive research → game design and prototyping → MVP build → ad campaigns → performance metrics analysis → continuous improvement.",
+      },
+      { key: "Team",
+        body: "Ilya Makarov — CEO, entrepreneur, ex-CEO of CS-Cart. Wide experience in CPO/CTO roles, alumnus of SLP.\n\nAndrey Saykovskiy — CCO, entrepreneur, CVO (ex-CEO and COO) at Night Street Inc. Main expertise: gamification and online/offline game products.",
+      },
+    ],
+    ru: [
+      { key: "Студия",
+        body: "1CLue Puzzles — мобильная игровая студия, специализирующаяся на словесных и логических головоломках. Инновации через быстрое прототипирование и интеграцию трендов.",
+      },
+      { key: "Стратегия",
+        body: "Фокус на логических и словесных пазлах. Используем трендовые UX-механики. Большой объём новых идей. Longtail-стратегия дизайна. Быстрый тест жизнеспособности.",
+      },
+      { key: "Процесс",
+        body: "Идея → исследование рынка и конкурентов → геймдизайн и прототип → сборка MVP → рекламные кампании → анализ метрик → постоянная итерация.",
+      },
+      { key: "Команда",
+        body: "Илья Макаров — CEO, предприниматель, ex-CEO CS-Cart. Широкий опыт в ролях CPO/CTO, алумни SLP.\n\nАндрей Сайковский — CCO, предприниматель, CVO (ex-CEO и COO) в Night Street Inc. Основная экспертиза: геймификация и игровые продукты онлайн/оффлайн.",
+      },
+    ],
+  },
+  games: [
+    { id: "wordtie", name: "WordTie", kindEN: "Word", kindRU: "Слова", img: "assets/game-wordtie.jpg",
+      pitchEN: "Guess a word based on associations with two other clues. Each correct guess forms a new pair. Climb the pyramid to reach the top and uncover the final answer.",
+      pitchRU: "Угадай слово по ассоциациям с двумя другими подсказками. Каждый верный ответ формирует новую пару. Карабкайся по пирамиде, чтобы добраться до вершины и раскрыть финальный ответ." },
+    { id: "planner", name: "Planner Puzzle", kindEN: "Logic", kindRU: "Логика", img: "assets/game-planner.jpg",
+      pitchEN: "Arrange tasks in the correct order within a daily schedule. Using conditions, players logically organize their day. Divided into chapters with narrative progression.",
+      pitchRU: "Расставь задачи в правильном порядке в дневном расписании. Используя условия, игроки логически организуют свой день. Игра разделена на главы с нарративным прогрессом." },
+    { id: "cryptomix", name: "CryptoMix", kindEN: "Word", kindRU: "Слова", img: "assets/game-cryptomix.jpg",
+      pitchEN: "Swap letters to reveal a hidden phrase. Each swap affects all instances of the selected letters, challenging players to form a coherent sentence.",
+      pitchRU: "Меняй буквы местами, чтобы открыть скрытую фразу. Каждая замена влияет на все вхождения выбранных букв — задача собрать связное предложение." },
+    { id: "swipewords", name: "SwipeWords", kindEN: "Word", kindRU: "Слова", img: "assets/game-swipewords.jpg",
+      pitchEN: "Word game with three actions: swipe left, swipe right, double tap. Score by swiping cards into the correct category and earn stars by double-tapping cards that fit both categories.",
+      pitchRU: "Словесная игра с тремя действиями: свайп влево, свайп вправо, двойной тап. Получай очки за свайп карт в правильную категорию и звёзды за двойной тап по картам, подходящим обеим категориям." },
+  ],
+};
+ReactDOM.createRoot(document.getElementById("root")).render(<window.CompanyPage id="1clue" content={onclueContent} />);
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SwipeScan — imakarov.us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/site.js?v=20260716-6"></script>
+<script type="text/babel" src="components/product-page.jsx?v=20260716-6"></script>
+
+<script type="text/babel">
+const accent = "oklch(0.72 0.16 250)";
+const product = window.SITE.independent.find(p => p.id === "swipescan");
+
+const Page = () => (
+  <ProductPage product={product} accent={accent}>
+    <ProdSection num="01" title="What it is" accent={accent}>
+      <p style={{ fontSize: 17, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
+        SwipeScan is a Tinder-style document scanner for iOS. Capture
+        a stack of documents, then swipe through them to keep, delete, or
+        re-scan — review faster than any traditional scanner app.
+      </p>
+    </ProdSection>
+
+    <ProdSection num="02" title="Key features" accent={accent}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+        {[
+          ["Swipe to triage", "Right keeps, left deletes, up rescans. Burn through a pile in seconds."],
+          ["AI auto-crop", "Edge detection + perspective correction in real time."],
+          ["Smart bundles", "Group related scans into a single PDF automatically."],
+          ["iCloud sync", "Everything synced, available everywhere, encrypted at rest."],
+        ].map(([h, d]) => (
+          <div key={h} style={{
+            padding: 24, borderRadius: 10,
+            background: "#0F0F0F", border: "1px solid #1F1F1F",
+          }}>
+            <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 8 }}>{h}</div>
+            <div style={{ fontSize: 13.5, color: "#B4B4B4", lineHeight: 1.55 }}>{d}</div>
+          </div>
+        ))}
+      </div>
+    </ProdSection>
+
+    <ProdSection num="03" title="Why it exists" accent={accent}>
+      <p style={{ fontSize: 16, lineHeight: 1.65, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
+        Most scanner apps treat documents like files. SwipeScan treats them
+        like photos — bulk capture, then triage. The interaction is faster
+        because it matches how people actually use their phones.
+      </p>
+    </ProdSection>
+
+    <ProdSection num="04" title="Status" accent={accent}>
+      <div className="mono" style={{
+        display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px 24px",
+        fontSize: 13, color: "#B4B4B4",
+      }}>
+        <span style={{ color: "#525252" }}>platform</span><span>iOS 17+</span>
+        <span style={{ color: "#525252" }}>status</span><span style={{ color: accent }}>● Live on the App Store</span>
+        <span style={{ color: "#525252" }}>roadmap</span><span>v2 — multi-device review, OCR search</span>
+        <span style={{ color: "#525252" }}>website</span><span>{product.url}</span>
+      </div>
+    </ProdSection>
+  </ProductPage>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Page />);
+</script>
+</body>
+</html>

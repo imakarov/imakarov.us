@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CS-Cart · Ilya Makarov</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+<style>body{background:#070708}</style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data/site.js?v=20260716-6"></script>
+<script src="image-slot.js?v=20260716-6"></script>
+<script type="text/babel" src="directions/company-page.jsx?v=20260716-6"></script>
+<script type="text/babel">
+const cscartContent = {
+  headline: { v: "50,000+", kEN: "Licensed installations worldwide", kRU: "Лицензий по всему миру" },
+  sections: {
+    en: [
+      { key: "Career arc",
+        body: "Joined as a PHP developer in 2005, became Head of Software Development in 2009, CTO in 2013, CEO in 2016. Eighteen years across one company — same product, different lenses every five years.",
+      },
+      { key: "Engineering",
+        body: "Set up Scrum from scratch. Built the QA organization. Stood up CI/CD pipelines.\n\nCompressed the release cycle from one week to one day without losing stability.",
+      },
+      { key: "Product portfolio",
+        body: "Ran three products in parallel as CTO. Grew the marketplace to 1000+ add-ons by 2016, 2500+ by 2023.",
+      },
+      { key: "Business",
+        body: "As CEO: revenue ×3 in three years. Migrated the customer base to subscription — support revenue +450%.\n\nProduct reached 50,000+ licensed installations worldwide.",
+      },
+    ],
+    ru: [
+      { key: "Карьерная арка",
+        body: "Пришёл PHP-программистом в 2005, стал Head of Software Development в 2009, CTO в 2013, CEO в 2016. Восемнадцать лет в одной компании — один продукт, разный угол зрения каждые пять лет.",
+      },
+      { key: "Инженерия",
+        body: "Внедрил Scrum с нуля. Построил QA-организацию. Настроил CI/CD пайплайны.\n\nСжал релизный цикл с недели до дня без потери стабильности.",
+      },
+      { key: "Продуктовый портфель",
+        body: "В роли CTO вёл три продукта параллельно. Маркетплейс вырос до 1000+ аддонов к 2016 и 2500+ к 2023.",
+      },
+      { key: "Бизнес",
+        body: "Как CEO: выручка ×3 за три года. Перевёл базу клиентов на подписку — выручка поддержки +450%.\n\nПродукт достиг 50 000+ лицензированных установок по всему миру.",
+      },
+    ],
+  },
+  staticImages: [
+    { id: "team", src: "assets/cscart-ilya-team.jpg", labelEN: "TEAM · CS-CART", labelRU: "КОМАНДА · CS-CART", height: 480 },
+  ],
+};
+ReactDOM.createRoot(document.getElementById("root")).render(<window.CompanyPage id="cscart" content={cscartContent} />);
+</script>
+</body>
+</html>
