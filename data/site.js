@@ -230,7 +230,7 @@ window.SITE = {
       keyEN: ["Launched 9 prototypes", "Integrated AI workflow", "Signed strategic partnership"],
       keyRU: ["Запущено 9 прототипов", "Интегрирован AI workflow", "Заключено стратегическое партнёрство"],
       url: "company-1clue.html",
-      external: "https://1clue.app",
+      external: "https://1clue.com",
       logo: "assets/logo-1clue.png",
       logoKey: "logo1clue",
       accent: "oklch(0.74 0.17 145)", // green
