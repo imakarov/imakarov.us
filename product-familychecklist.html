@@ -30,14 +30,14 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <script src="data/site.js?v=20260716-6"></script>
-<script type="text/babel" src="components/product-page.jsx?v=20260716-6"></script>
+<script type="text/babel" src="components/product-page.jsx?v=20260905-2"></script>
 
 <script type="text/babel">
 const accent = "oklch(0.78 0.14 145)";
 const product = window.SITE.independent.find(p => p.id === "familychecklist");
 
 const Page = () => (
-  <ProductPage product={product} accent={accent}>
+  <ProductPage product={product} accent={accent} site="https://family-checklist.com">
     <ProdSection num="01" title="What it is" accent={accent}>
       <p style={{ fontSize: 17, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
         FamilyCheckList is a shared list app built for households. Trips,
@@ -81,7 +81,7 @@ const Page = () => (
         <span style={{ color: "#525252" }}>platform</span><span>iOS · Android · Web</span>
         <span style={{ color: "#525252" }}>status</span><span style={{ color: accent }}>● Live on App Store, Play Store, web</span>
         <span style={{ color: "#525252" }}>roadmap</span><span>AI list suggestions, recurring lists</span>
-        <span style={{ color: "#525252" }}>website</span><span>{product.url}</span>
+        <span style={{ color: "#525252" }}>website</span><span>family-checklist.com</span>
       </div>
     </ProdSection>
   </ProductPage>

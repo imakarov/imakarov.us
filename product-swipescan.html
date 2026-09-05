@@ -30,14 +30,14 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <script src="data/site.js?v=20260716-6"></script>
-<script type="text/babel" src="components/product-page.jsx?v=20260716-6"></script>
+<script type="text/babel" src="components/product-page.jsx?v=20260905-2"></script>
 
 <script type="text/babel">
 const accent = "oklch(0.72 0.16 250)";
 const product = window.SITE.independent.find(p => p.id === "swipescan");
 
 const Page = () => (
-  <ProductPage product={product} accent={accent}>
+  <ProductPage product={product} accent={accent} site="https://apps.apple.com/us/app/swipescan-capture-text/id6742683450">
     <ProdSection num="01" title="What it is" accent={accent}>
       <p style={{ fontSize: 17, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
         SwipeScan is a Tinder-style document scanner for iOS. Capture
@@ -81,7 +81,7 @@ const Page = () => (
         <span style={{ color: "#525252" }}>platform</span><span>iOS 17+</span>
         <span style={{ color: "#525252" }}>status</span><span style={{ color: accent }}>● Live on the App Store</span>
         <span style={{ color: "#525252" }}>roadmap</span><span>v2 — multi-device review, OCR search</span>
-        <span style={{ color: "#525252" }}>website</span><span>{product.url}</span>
+        <span style={{ color: "#525252" }}>website</span><span>imakarov.us/swipescan</span>
       </div>
     </ProdSection>
   </ProductPage>
