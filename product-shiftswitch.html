@@ -69,7 +69,7 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <script src="data/site.js?v=20260928-1"></script>
-<script type="text/babel" src="components/product-page.jsx?v=20260928-1"></script>
+<script type="text/babel" src="components/product-page.jsx?v=20260928-2"></script>
 
 <script type="text/babel">
 const accent = "oklch(0.72 0.17 285)";
@@ -133,80 +133,93 @@ const Copy = ({ text }) => {
 };
 
 const Card = ({ h, children }) => <div className="ss-card"><h3>{h}</h3><p>{children}</p></div>;
+const Label = ({ children }) => <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginBottom: 12, letterSpacing: "0.05em" }}>{children}</div>;
+const Lead = ({ children, size = 17 }) => <p style={{ fontSize: size, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>{children}</p>;
+const Btn = ({ href, primary, children }) => (
+  <a className="ss-btn" href={href} target={primary ? undefined : "_blank"} rel="noopener"
+     style={primary ? { background: accent, color: "#0A0A0A" } : { border: "1px solid #2A2A2A", color: "#EDEDED" }}>{children}</a>
+);
 
-const Page = () => (
-  <ProductPage product={product} accent={accent} site={REPO} siteLabel="GitHub →" visual={<Demo />}>
-    <ProdSection num="01" title="What it is" accent={accent}>
-      <p style={{ fontSize: 17, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
-        Everyone who types in two languages knows <span className="mono" style={{ color: "#EDEDED" }}>ghbdtn</span> —
-        «привет» typed with the wrong layout on. ShiftSwitch fixes it with one key: tap Shift, and the last word is
-        erased, retyped in the other layout, and the system layout is switched so you keep typing correctly.
-        Tap again to undo. It is a free, open-source replacement for the manual-conversion part of Punto Switcher
-        and Caramba Switcher — written from scratch to be tiny and to work where they fail, including the terminal.
-      </p>
+const Page = () => {
+  const [lang, setLang] = usePageLang();
+  const t = (ru, en) => (lang === "ru" ? ru : en);
+  React.useEffect(() => {
+    document.title = t("ShiftSwitch — исправляет раскладку по нажатию Shift · imakarov.us",
+                       "ShiftSwitch — tap Shift to fix the keyboard layout · imakarov.us");
+  }, [lang]);
+  const W = <span className="mono" style={{ color: "#EDEDED" }}>ghbdtn</span>;
+  return (
+  <ProductPage product={product} accent={accent} site={REPO} siteLabel="GitHub →" visual={<Demo />} lang={lang} setLang={setLang}>
+    <ProdSection num="01" title={t("Что это", "What it is")} accent={accent}>
+      <Lead>{t(
+        <>Все, кто печатает на двух языках, знают {W} — это «привет», набранный не в той раскладке. ShiftSwitch
+        исправляет это одной клавишей: короткое нажатие Shift — и последнее слово стирается, перепечатывается в другой
+        раскладке, а система переключается, чтобы дальше вы печатали правильно. Повторное нажатие — отмена. Это бесплатная
+        open-source замена ручного исправления из Punto Switcher и Caramba Switcher, написанная с нуля: крошечная и
+        работающая там, где они ломаются, включая терминал.</>,
+        <>Everyone who types in two languages knows {W} — «привет» typed with the wrong layout on. ShiftSwitch fixes it
+        with one key: tap Shift, and the last word is erased, retyped in the other layout, and the system layout is
+        switched so you keep typing correctly. Tap again to undo. It is a free, open-source replacement for the
+        manual-conversion part of Punto Switcher and Caramba Switcher — written from scratch to be tiny and to work where
+        they fail, including the terminal.</>)}</Lead>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
-        <a className="ss-btn" href={DMG} style={{ background: accent, color: "#0A0A0A" }}>↓ Download for macOS</a>
-        <a className="ss-btn" href={REPO} target="_blank" rel="noopener" style={{ border: "1px solid #2A2A2A", color: "#EDEDED" }}>Source on GitHub</a>
-        <a className="ss-btn" href={SPONSOR} target="_blank" rel="noopener" style={{ border: "1px solid #2A2A2A", color: "#EDEDED" }}>♥ Sponsor</a>
+        <Btn href={DMG} primary>↓ {t("Скачать для macOS", "Download for macOS")}</Btn>
+        <Btn href={REPO}>{t("Исходный код на GitHub", "Source on GitHub")}</Btn>
+        <Btn href={SPONSOR}>♥ {t("Поддержать", "Sponsor")}</Btn>
       </div>
     </ProdSection>
 
-    <ProdSection num="02" title="How it works" accent={accent}>
+    <ProdSection num="02" title={t("Как это работает", "How it works")} accent={accent}>
       <div className="ss-grid3">
-        <Card h="1 · Type">Type as usual. ShiftSwitch remembers only the last word — the keys since the last space.</Card>
-        <Card h="2 · Tap Shift">Wrong layout? Press and release Shift, nothing else. Shift+letter or a long hold are ignored.</Card>
-        <Card h="3 · Done">The word is retyped in the other layout and the layout switches. Tap again to undo.</Card>
+        <Card h={t("1 · Печатаете", "1 · Type")}>{t("Как обычно. ShiftSwitch помнит только последнее слово — клавиши после последнего пробела.", "Type as usual. ShiftSwitch remembers only the last word — the keys since the last space.")}</Card>
+        <Card h={t("2 · Нажимаете Shift", "2 · Tap Shift")}>{t("Не та раскладка? Нажмите и отпустите Shift, больше ничего. Shift с буквой и долгое удержание игнорируются.", "Wrong layout? Press and release Shift, nothing else. Shift+letter or a long hold are ignored.")}</Card>
+        <Card h={t("3 · Готово", "3 · Done")}>{t("Слово перепечатано в другой раскладке, раскладка переключена. Можно сразу печатать дальше. Ещё раз Shift — отмена.", "The word is retyped in the other layout and the layout switches. Keep typing right away. Tap again to undo.")}</Card>
       </div>
     </ProdSection>
 
-    <ProdSection num="03" title="Install" accent={accent}>
+    <ProdSection num="03" title={t("Установка", "Install")} accent={accent}>
       <div className="ss-grid2">
-        <div>
-          <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginBottom: 12, letterSpacing: "0.05em" }}>HOMEBREW</div>
-          <Copy text={BREW} />
-        </div>
-        <div>
-          <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginBottom: 12, letterSpacing: "0.05em" }}>OR DOWNLOAD</div>
-          <a className="ss-btn" href={DMG} style={{ background: accent, color: "#0A0A0A" }}>↓ ShiftSwitch.dmg</a>
-        </div>
+        <div><Label>HOMEBREW</Label><Copy text={BREW} /></div>
+        <div><Label>{t("ИЛИ СКАЧАТЬ", "OR DOWNLOAD")}</Label><Btn href={DMG} primary>↓ ShiftSwitch.dmg</Btn></div>
       </div>
-      <p style={{ fontSize: 14, lineHeight: 1.6, color: "#7A7A7A", maxWidth: 720, margin: "24px 0 0" }}>
-        Drag to Applications and launch. macOS will ask for Accessibility and Input Monitoring access (System Settings → Privacy &amp; Security) —
-        they are needed to see keystrokes and retype the word. Enable <i>Launch at Login</i> from the menu bar icon.
-        macOS 13 Ventura or later, Apple Silicon and Intel.
-      </p>
+      <p style={{ fontSize: 14, lineHeight: 1.6, color: "#7A7A7A", maxWidth: 720, margin: "24px 0 0" }}>{t(
+        <>Перетащите в «Программы» и запустите. macOS попросит доступ к «Универсальному доступу» и «Мониторингу ввода»
+        (Системные настройки → Конфиденциальность и безопасность) — без них нельзя видеть нажатия и перепечатывать слово.
+        Включите <i>«Запускать при входе»</i> в меню значка. macOS 13 Ventura и новее, Apple Silicon и Intel.</>,
+        <>Drag to Applications and launch. macOS will ask for Accessibility and Input Monitoring access (System Settings →
+        Privacy &amp; Security) — they are needed to see keystrokes and retype the word. Enable <i>Launch at Login</i> from
+        the menu bar icon. macOS 13 Ventura or later, Apple Silicon and Intel.</>)}</p>
     </ProdSection>
 
-    <ProdSection num="04" title="Built on the mistakes of Punto and Caramba" accent={accent}>
+    <ProdSection num="04" title={t("Сделан на ошибках Punto и Caramba", "Built on the mistakes of Punto and Caramba")} accent={accent}>
       <div className="ss-grid2">
-        <Card h="Works in Terminal">No select-copy-paste tricks (⌘C is SIGINT in a terminal). The word is erased with Backspace and retyped — works in Terminal, iTerm2, zsh.</Card>
-        <Card h="х ъ ж э б ю ё stay in the word">Letters living on punctuation keys aren't cut off, so «их», «всё», «ещё» convert. Characters come from your real layouts, incl. Russian – PC.</Card>
-        <Card h="No false triggers">A single tap only. Any key, click or modifier during the press cancels it — no accidental conversions like with double Shift.</Card>
-        <Card h="No swapped letters">Waits until the layout switch lands; each keystroke carries its own Unicode text. Paced for Slack, VS Code, Telegram.</Card>
-        <Card h="Honest about Secure Input">When Secure Keyboard Entry blocks all keyboard tools, a lock icon shows which app holds it — no focus-stealing popups.</Card>
-        <Card h="Tiny">≈300 KB universal binary, ≈11 MB RAM, 0% CPU at idle. One Swift file, no dependencies.</Card>
+        <Card h={t("Работает в терминале", "Works in Terminal")}>{t("Никаких трюков с выделением и ⌘C/⌘V (в терминале ⌘C — это SIGINT). Слово стирается Backspace'ом и набирается заново — работает в Terminal, iTerm2, zsh.", "No select-copy-paste tricks (⌘C is SIGINT in a terminal). The word is erased with Backspace and retyped — works in Terminal, iTerm2, zsh.")}</Card>
+        <Card h={t("х ъ ж э б ю ё — часть слова", "х ъ ж э б ю ё stay in the word")}>{t("Буквы на клавишах пунктуации не отрезаются, поэтому «их», «всё», «ещё» исправляются. Символы берутся из ваших реальных раскладок, включая «Русская – ПК».", "Letters living on punctuation keys aren't cut off, so «их», «всё», «ещё» convert. Characters come from your real layouts, incl. Russian – PC.")}</Card>
+        <Card h={t("Без ложных срабатываний", "No false triggers")}>{t("Только одиночное нажатие. Любая клавиша, клик или модификатор во время нажатия отменяют его — никаких случайных замен, как с двойным Shift.", "A single tap only. Any key, click or modifier during the press cancels it — no accidental conversions like with double Shift.")}</Card>
+        <Card h={t("Буквы не путаются", "No swapped letters")}>{t("Ждёт, пока раскладка реально переключится; нажатия, сделанные во время исправления, придерживаются и допечатываются по порядку. Работает в Slack, VS Code, Telegram.", "Waits until the layout switch lands; keys typed during a conversion are held and replayed in order. Paced for Slack, VS Code, Telegram.")}</Card>
+        <Card h={t("Честно про Secure Input", "Honest about Secure Input")}>{t("Когда Secure Keyboard Entry блокирует все клавиатурные утилиты, значок-замок показывает, какое приложение его держит, — без всплывающих окон.", "When Secure Keyboard Entry blocks all keyboard tools, a lock icon shows which app holds it — no focus-stealing popups.")}</Card>
+        <Card h={t("Крошечный", "Tiny")}>{t("≈300 КБ, универсальный бинарник, ≈11 МБ памяти, 0% CPU в простое. Один файл на Swift, без зависимостей.", "≈300 KB universal binary, ≈11 MB RAM, 0% CPU at idle. One Swift file, no dependencies.")}</Card>
       </div>
     </ProdSection>
 
-    <ProdSection num="05" title="Privacy" accent={accent}>
-      <p style={{ fontSize: 16, lineHeight: 1.65, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
-        No network access, no telemetry, no accounts, no dictionaries, no automatic switching, no keystroke logs.
-        The only thing ShiftSwitch holds in memory is the last word, and it forgets it on a click, Enter, Tab,
-        arrow keys or an app switch. The whole source is one readable file on GitHub.
-      </p>
+    <ProdSection num="05" title={t("Приватность", "Privacy")} accent={accent}>
+      <Lead size={16}>{t(
+        "Без сети, телеметрии, аккаунтов, словарей, автопереключения и логов нажатий. В памяти хранится только последнее слово, и оно забывается при клике, Enter, Tab, стрелках или смене приложения. Весь исходный код — один читаемый файл на GitHub.",
+        "No network access, no telemetry, no accounts, no dictionaries, no automatic switching, no keystroke logs. The only thing ShiftSwitch holds in memory is the last word, and it forgets it on a click, Enter, Tab, arrow keys or an app switch. The whole source is one readable file on GitHub.")}</Lead>
     </ProdSection>
 
-    <ProdSection num="06" title="Status" accent={accent}>
+    <ProdSection num="06" title={t("Статус", "Status")} accent={accent}>
       <div className="mono" style={{ fontSize: 13, color: "#B4B4B4", maxWidth: 720 }}>
-        <div className="ss-row"><span>platform</span><span>macOS 13+ · Apple Silicon · Intel</span></div>
-        <div className="ss-row"><span>status</span><span style={{ color: accent }}>● v1.0.2 · free</span></div>
-        <div className="ss-row"><span>license</span><span>MIT, open source</span></div>
-        <div className="ss-row"><span>source</span><a href={REPO} style={{ color: "#EDEDED" }}>github.com/imakarov/shiftswitch</a></div>
-        <div className="ss-row"><span>support</span><a href={SPONSOR} style={{ color: "#EDEDED" }}>GitHub Sponsors ♥</a></div>
+        <div className="ss-row"><span>{t("платформа", "platform")}</span><span>macOS 13+ · Apple Silicon · Intel</span></div>
+        <div className="ss-row"><span>{t("статус", "status")}</span><span style={{ color: accent }}>● v1.0.2 · {t("бесплатно", "free")}</span></div>
+        <div className="ss-row"><span>{t("лицензия", "license")}</span><span>MIT, open source</span></div>
+        <div className="ss-row"><span>{t("код", "source")}</span><a href={REPO} style={{ color: "#EDEDED" }}>github.com/imakarov/shiftswitch</a></div>
+        <div className="ss-row"><span>{t("поддержка", "support")}</span><a href={SPONSOR} style={{ color: "#EDEDED" }}>GitHub Sponsors ♥</a></div>
       </div>
     </ProdSection>
   </ProductPage>
-);
+  );
+};
 
 ReactDOM.createRoot(document.getElementById("root")).render(<Page />);
 </script>
