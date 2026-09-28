@@ -268,7 +268,7 @@ const ALIVE = ({ data = window.SITE }) => {
         title={lang === "ru" ? "Что я строю в фоне, сам" : "What I build in parallel, solo"} lang={lang}>
         <div className="ind-grid">
           {data.independent.map((p) => (
-            <MagCard key={p.id} className={"ind-card" + (p.featured ? " ind-featured" : "")} data-reveal as="a" href={p.url}>
+            <MagCard key={p.id} className={"ind-card" + (p.featured ? " ind-featured" : "")} data-reveal as="a" href={p.url && `${p.url}?lang=${lang}`}>
               <div className="ind-meta">
                 <div className="ind-top">
                   {p.appIcon && <img src={p.appIcon} alt={p.name + " icon"} className="ind-icon" />}
