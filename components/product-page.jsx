@@ -2,7 +2,7 @@
 // Shared subpage shell for product detail pages.
 // Dark, mono-accented, returns to hub.
 
-const ProductPage = ({ product, accent = "oklch(0.78 0.18 60)", site, children }) => {
+const ProductPage = ({ product, accent = "oklch(0.78 0.18 60)", site, siteLabel = "Open product →", visual, children }) => {
   const accentSoft = accent.replace(")", " / 0.12)");
   return (
     <div style={{ minHeight: "100vh", background: "#0A0A0A", color: "#EDEDED", fontFamily: "var(--font-sans)" }}>
@@ -23,7 +23,7 @@ const ProductPage = ({ product, accent = "oklch(0.78 0.18 60)", site, children }
         {site && <a href={site} target="_blank" rel="noopener" style={{
           marginLeft: "auto", fontSize: 12,
           padding: "7px 14px", border: `1px solid ${accent}`, color: accent, borderRadius: 6,
-        }}>Open product →</a>}
+        }}>{siteLabel}</a>}
       </header>
 
       {/* Hero */}
@@ -50,9 +50,9 @@ const ProductPage = ({ product, accent = "oklch(0.78 0.18 60)", site, children }
         }}>{product.tagline || product.taglineEN}</p>
       </section>
 
-      {/* Visual placeholder */}
+      {/* Visual (custom per page, placeholder otherwise) */}
       <section style={{ padding: "0 32px 64px", maxWidth: 980, margin: "0 auto" }}>
-        <div style={{
+        {visual || <div style={{
           height: 380, borderRadius: 14,
           background: `radial-gradient(circle at 30% 30%, ${accentSoft}, transparent 60%),
                        repeating-linear-gradient(45deg, #0F0F0F 0 20px, #131313 20px 40px)`,
@@ -62,7 +62,7 @@ const ProductPage = ({ product, accent = "oklch(0.78 0.18 60)", site, children }
           <div className="mono" style={{ fontSize: 11, color: "#525252", letterSpacing: "0.05em" }}>
             // PRODUCT SHOT · {product.name.toUpperCase()}
           </div>
-        </div>
+        </div>}
       </section>
 
       {children}

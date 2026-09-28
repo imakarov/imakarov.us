@@ -268,7 +268,7 @@ const ALIVE = ({ data = window.SITE }) => {
         title={lang === "ru" ? "Что я строю в фоне, сам" : "What I build in parallel, solo"} lang={lang}>
         <div className="ind-grid">
           {data.independent.map((p) => (
-            <MagCard key={p.id} className="ind-card" data-reveal as="a" href={p.url}>
+            <MagCard key={p.id} className={"ind-card" + (p.featured ? " ind-featured" : "")} data-reveal as="a" href={p.url}>
               <div className="ind-meta">
                 <div className="ind-top">
                   {p.appIcon && <img src={p.appIcon} alt={p.name + " icon"} className="ind-icon" />}
@@ -673,6 +673,7 @@ const AliveStyles = () => (
     .ind-card:hover{border-color:rgba(120,140,255,.4)}
     .ind-meta{padding:20px}
     .ind-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+    .ind-featured{grid-column:1 / -1}
     .ind-icon{width:56px;height:56px;border-radius:12px;flex-shrink:0;object-fit:cover}
     .ind-status{font-size:11px;color:#7A7A7A;letter-spacing:.04em}
     .ind-name{font-size:22px;font-weight:500;letter-spacing:-.02em;margin-top:4px}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ShiftSwitch — tap Shift to fix the keyboard layout · imakarov.us</title>
+<meta name="description" content="Typed in the wrong layout? Tap Shift. ShiftSwitch is a tiny, free, open-source macOS app that retypes the last word in the other keyboard layout (ghbdtn → привет). Works in Terminal and iTerm2." />
+<meta property="og:title" content="ShiftSwitch — tap Shift to fix the keyboard layout" />
+<meta property="og:description" content="Tiny native macOS layout fixer: ghbdtn → привет with one Shift tap. Free and open source." />
+<meta property="og:image" content="https://imakarov.us/assets/icon-shiftswitch.png" />
+<link rel="icon" href="assets/icon-shiftswitch.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css?v=20260716-6" />
+<style>
+  .ss-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .ss-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .ss-grid2>*,.ss-grid3>*{min-width:0}
+  .ss-card{padding:24px;border-radius:10px;background:#0F0F0F;border:1px solid #1F1F1F}
+  .ss-card h3{margin:0 0 8px;font-size:16px;font-weight:500}
+  .ss-card p{margin:0;font-size:13.5px;color:#B4B4B4;line-height:1.55}
+  .ss-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;transition:transform .15s,opacity .15s}
+  .ss-btn:hover{transform:translateY(-1px);opacity:.92}
+  .ss-cmd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:10px;background:#0F0F0F;border:1px solid #1F1F1F;font-size:14px;overflow-x:auto}
+  .ss-cmd code{flex:1;white-space:nowrap;color:#EDEDED}
+  .ss-cmd button{background:none;border:1px solid #2A2A2A;color:#B4B4B4;border-radius:6px;padding:5px 10px;font:inherit;font-size:12px;cursor:pointer}
+  .ss-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:14px 0;border-bottom:1px solid #1A1A1A;font-size:14px;line-height:1.5}
+  .ss-row span:first-child{color:#7A7A7A}
+  .ss-demo{border-radius:14px;border:1px solid #1F1F1F;overflow:hidden;background:#0C0C0E}
+  .ss-demo-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #1A1A1A}
+  .ss-dot{width:11px;height:11px;border-radius:50%;background:#2A2A2A}
+  .ss-demo-body{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:56px 48px;min-height:260px}
+  .ss-line{font-size:44px;letter-spacing:-0.01em;white-space:nowrap}
+  .ss-caret{display:inline-block;width:3px;height:44px;margin-left:4px;vertical-align:-6px;animation:ssblink 1s steps(1) infinite}
+  @keyframes ssblink{50%{opacity:0}}
+  .ss-key{width:150px;height:110px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(#1C1C22,#141418);border:1px solid #2C2C34;box-shadow:0 6px 0 #0A0A0C;transition:all .12s;flex-shrink:0}
+  .ss-key.down{transform:translateY(5px);box-shadow:0 1px 0 #0A0A0C}
+  .ss-layout{padding:3px 8px;border-radius:5px;border:1px solid #2A2A2A;font-size:11px}
+  @media (max-width:720px){
+    .ss-grid3,.ss-grid2{grid-template-columns:1fr}
+    .ss-row{grid-template-columns:1fr;gap:4px}
+    .ss-demo-body{flex-direction:column;padding:36px 20px;align-items:flex-start}
+    .ss-line{font-size:32px}
+    .ss-caret{height:32px}
+    h1{font-size:48px !important}
+  }
+</style>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104675156', 'ym');
+
+        ym(104675156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104675156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/site.js?v=20260928-1"></script>
+<script type="text/babel" src="components/product-page.jsx?v=20260928-1"></script>
+
+<script type="text/babel">
+const accent = "oklch(0.72 0.17 285)";
+const product = window.SITE.independent.find(p => p.id === "shiftswitch");
+const REPO = "https://github.com/imakarov/shiftswitch";
+const DMG = REPO + "/releases/latest/download/ShiftSwitch.dmg";
+const SPONSOR = "https://github.com/sponsors/imakarov";
+const BREW = "brew install --cask imakarov/tap/shiftswitch";
+
+// Animated demo: type "ghbdtn" in EN, tap Shift, word becomes "привет" in RU. Loops.
+const Demo = () => {
+  const [st, setSt] = React.useState({ text: "", layout: "EN", down: false });
+  React.useEffect(() => {
+    const steps = [];
+    const wrong = "ghbdtn", right = "привет";
+    for (let i = 1; i <= wrong.length; i++) steps.push([140, { text: wrong.slice(0, i), layout: "EN", down: false }]);
+    steps.push([900, { text: wrong, layout: "EN", down: true }]);
+    steps.push([120, { text: wrong, layout: "EN", down: false }]);
+    for (let i = wrong.length - 1; i >= 0; i--) steps.push([35, { text: wrong.slice(0, i), layout: "RU", down: false }]);
+    for (let i = 1; i <= right.length; i++) steps.push([35, { text: right.slice(0, i), layout: "RU", down: false }]);
+    steps.push([2600, { text: right, layout: "RU", down: false }]);
+    steps.push([400, { text: "", layout: "EN", down: false }]);
+    let i = 0, t;
+    const run = () => { const [d, s] = steps[i]; t = setTimeout(() => { setSt(s); i = (i + 1) % steps.length; run(); }, d); };
+    run();
+    return () => clearTimeout(t);
+  }, []);
+  const ok = st.layout === "RU" && st.text.length > 0;
+  return (
+    <div className="ss-demo">
+      <div className="ss-demo-bar">
+        <span className="ss-dot" /><span className="ss-dot" /><span className="ss-dot" />
+        <span className="mono" style={{ marginLeft: "auto", fontSize: 11, color: "#525252" }}>Terminal — zsh</span>
+        <span className="mono ss-layout" style={{ color: st.layout === "RU" ? accent : "#7A7A7A" }}>{st.layout}</span>
+      </div>
+      <div className="ss-demo-body">
+        <div className="ss-line mono">
+          <span style={{ color: "#525252" }}>$ echo </span>
+          <span style={{ color: ok ? accent : "#EDEDED" }}>{st.text}</span>
+          <span className="ss-caret" style={{ background: accent }} />
+        </div>
+        <div className={"ss-key" + (st.down ? " down" : "")}>
+          <span style={{ fontSize: 34, color: st.down ? accent : "#B4B4B4" }}>⇧</span>
+          <span className="mono" style={{ fontSize: 11, color: "#7A7A7A" }}>tap shift</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Copy = ({ text }) => {
+  const [done, setDone] = React.useState(false);
+  return (
+    <div className="ss-cmd mono">
+      <code>{text}</code>
+      <button onClick={() => { navigator.clipboard.writeText(text); setDone(true); setTimeout(() => setDone(false), 1500); }}>
+        {done ? "copied" : "copy"}
+      </button>
+    </div>
+  );
+};
+
+const Card = ({ h, children }) => <div className="ss-card"><h3>{h}</h3><p>{children}</p></div>;
+
+const Page = () => (
+  <ProductPage product={product} accent={accent} site={REPO} siteLabel="GitHub →" visual={<Demo />}>
+    <ProdSection num="01" title="What it is" accent={accent}>
+      <p style={{ fontSize: 17, lineHeight: 1.6, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
+        Everyone who types in two languages knows <span className="mono" style={{ color: "#EDEDED" }}>ghbdtn</span> —
+        «привет» typed with the wrong layout on. ShiftSwitch fixes it with one key: tap Shift, and the last word is
+        erased, retyped in the other layout, and the system layout is switched so you keep typing correctly.
+        Tap again to undo. It is a free, open-source replacement for the manual-conversion part of Punto Switcher
+        and Caramba Switcher — written from scratch to be tiny and to work where they fail, including the terminal.
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
+        <a className="ss-btn" href={DMG} style={{ background: accent, color: "#0A0A0A" }}>↓ Download for macOS</a>
+        <a className="ss-btn" href={REPO} target="_blank" rel="noopener" style={{ border: "1px solid #2A2A2A", color: "#EDEDED" }}>Source on GitHub</a>
+        <a className="ss-btn" href={SPONSOR} target="_blank" rel="noopener" style={{ border: "1px solid #2A2A2A", color: "#EDEDED" }}>♥ Sponsor</a>
+      </div>
+    </ProdSection>
+
+    <ProdSection num="02" title="How it works" accent={accent}>
+      <div className="ss-grid3">
+        <Card h="1 · Type">Type as usual. ShiftSwitch remembers only the last word — the keys since the last space.</Card>
+        <Card h="2 · Tap Shift">Wrong layout? Press and release Shift, nothing else. Shift+letter or a long hold are ignored.</Card>
+        <Card h="3 · Done">The word is retyped in the other layout and the layout switches. Tap again to undo.</Card>
+      </div>
+    </ProdSection>
+
+    <ProdSection num="03" title="Install" accent={accent}>
+      <div className="ss-grid2">
+        <div>
+          <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginBottom: 12, letterSpacing: "0.05em" }}>HOMEBREW</div>
+          <Copy text={BREW} />
+        </div>
+        <div>
+          <div className="mono" style={{ fontSize: 11, color: "#7A7A7A", marginBottom: 12, letterSpacing: "0.05em" }}>OR DOWNLOAD</div>
+          <a className="ss-btn" href={DMG} style={{ background: accent, color: "#0A0A0A" }}>↓ ShiftSwitch.dmg</a>
+        </div>
+      </div>
+      <p style={{ fontSize: 14, lineHeight: 1.6, color: "#7A7A7A", maxWidth: 720, margin: "24px 0 0" }}>
+        Drag to Applications and launch. macOS will ask for Accessibility access (System Settings → Privacy &amp; Security →
+        Accessibility) — it is needed to see keystrokes and retype the word. Enable <i>Launch at Login</i> from the menu bar icon.
+        macOS 13 Ventura or later, Apple Silicon and Intel.
+      </p>
+    </ProdSection>
+
+    <ProdSection num="04" title="Built on the mistakes of Punto and Caramba" accent={accent}>
+      <div className="ss-grid2">
+        <Card h="Works in Terminal">No select-copy-paste tricks (⌘C is SIGINT in a terminal). The word is erased with Backspace and retyped — works in Terminal, iTerm2, zsh.</Card>
+        <Card h="х ъ ж э б ю ё stay in the word">Letters living on punctuation keys aren't cut off, so «их», «всё», «ещё» convert. Characters come from your real layouts, incl. Russian – PC.</Card>
+        <Card h="No false triggers">A single tap only. Any key, click or modifier during the press cancels it — no accidental conversions like with double Shift.</Card>
+        <Card h="No swapped letters">Waits until the layout switch lands; each keystroke carries its own Unicode text. Paced for Slack, VS Code, Telegram.</Card>
+        <Card h="Honest about Secure Input">When Secure Keyboard Entry blocks all keyboard tools, a lock icon shows which app holds it — no focus-stealing popups.</Card>
+        <Card h="Tiny">≈300 KB universal binary, ≈11 MB RAM, 0% CPU at idle. One Swift file, no dependencies.</Card>
+      </div>
+    </ProdSection>
+
+    <ProdSection num="05" title="Privacy" accent={accent}>
+      <p style={{ fontSize: 16, lineHeight: 1.65, color: "#B4B4B4", maxWidth: 720, margin: 0 }}>
+        No network access, no telemetry, no accounts, no dictionaries, no automatic switching, no keystroke logs.
+        The only thing ShiftSwitch holds in memory is the last word, and it forgets it on a click, Enter, Tab,
+        arrow keys or an app switch. The whole source is one readable file on GitHub.
+      </p>
+    </ProdSection>
+
+    <ProdSection num="06" title="Status" accent={accent}>
+      <div className="mono" style={{ fontSize: 13, color: "#B4B4B4", maxWidth: 720 }}>
+        <div className="ss-row"><span>platform</span><span>macOS 13+ · Apple Silicon · Intel</span></div>
+        <div className="ss-row"><span>status</span><span style={{ color: accent }}>● v1.0 · free</span></div>
+        <div className="ss-row"><span>license</span><span>MIT, open source</span></div>
+        <div className="ss-row"><span>source</span><a href={REPO} style={{ color: "#EDEDED" }}>github.com/imakarov/shiftswitch</a></div>
+        <div className="ss-row"><span>support</span><a href={SPONSOR} style={{ color: "#EDEDED" }}>GitHub Sponsors ♥</a></div>
+      </div>
+    </ProdSection>
+  </ProductPage>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Page />);
+</script>
+</body>
+</html>

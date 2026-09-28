@@ -240,6 +240,18 @@ window.SITE = {
   // ── INDEPENDENT — products built in parallel, not under any company
   independent: [
     {
+      id: "shiftswitch",
+      name: "ShiftSwitch",
+      kindEN: "macOS · Open source",
+      kindRU: "macOS · Open source",
+      status: "Live",
+      taglineEN: "Typed in the wrong layout? Tap Shift — ghbdtn becomes привет. Tiny native layout fixer that works in Terminal.",
+      taglineRU: "Набрал не в той раскладке? Нажми Shift — ghbdtn станет привет. Лёгкий нативный переключатель, работает в терминале.",
+      appIcon: "assets/icon-shiftswitch.png",
+      url: "product-shiftswitch.html",
+      featured: true,
+    },
+    {
       id: "health-agent",
       name: "Personal Health Agent",
       kindEN: "AI · Health data aggregator",
