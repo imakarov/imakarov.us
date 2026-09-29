@@ -177,8 +177,8 @@ const Page = () => {
       </div>
       <div className="ss-card" style={{ marginTop: 16 }}>
         <h3>{t("Выделенный текст", "Selected text")}</h3>
-        <p>{t("Выделите текст в поле ввода — в браузере, редакторе, мессенджере — и нажмите Shift: весь фрагмент перепечатается в другой раскладке и останется выделенным (Ghbdtn, vbh! → Привет, мир!). Если выделения нет или приложение его не сообщает, исправляется последнее слово. Автодополнение во время набора за выделение не принимается, в терминале функция отключена.",
-               "Select text in a field — browser, editor, messenger — and tap Shift: the whole fragment is retyped in the other layout and stays selected (Ghbdtn, vbh! → Привет, мир!). No selection, or an app that doesn't report it — the last word is fixed instead. Inline autocomplete while typing is never taken for a selection; terminals are excluded.")}</p>
+        <p>{t("Выделите текст в поле ввода — в браузере, редакторе, мессенджере — и нажмите Shift: весь фрагмент перепечатается в другой раскладке, курсор встанет в конец (Ghbdtn, vbh! → Привет, мир!). Сразу ещё раз Shift — отмена. Если выделения нет или приложение его не сообщает, исправляется последнее слово. Автодополнение во время набора за выделение не принимается, в терминале функция отключена.",
+               "Select text in a field — browser, editor, messenger — and tap Shift: the whole fragment is retyped in the other layout, caret at its end (Ghbdtn, vbh! → Привет, мир!). Tap again right away to undo. No selection, or an app that doesn't report it — the last word is fixed instead. Inline autocomplete while typing is never taken for a selection; terminals are excluded.")}</p>
       </div>
     </ProdSection>
 
@@ -216,7 +216,7 @@ const Page = () => {
     <ProdSection num="06" title={t("Статус", "Status")} accent={accent}>
       <div className="mono" style={{ fontSize: 13, color: "#B4B4B4", maxWidth: 720 }}>
         <div className="ss-row"><span>{t("платформа", "platform")}</span><span>macOS 13+ · Apple Silicon · Intel</span></div>
-        <div className="ss-row"><span>{t("статус", "status")}</span><span style={{ color: accent }}>● v1.1.0 · {t("бесплатно", "free")}</span></div>
+        <div className="ss-row"><span>{t("статус", "status")}</span><span style={{ color: accent }}>● v1.1.1 · {t("бесплатно", "free")}</span></div>
         <div className="ss-row"><span>{t("лицензия", "license")}</span><span>MIT, open source</span></div>
         <div className="ss-row"><span>{t("код", "source")}</span><a href={REPO} style={{ color: "#EDEDED" }}>github.com/imakarov/shiftswitch</a></div>
         <div className="ss-row"><span>{t("поддержка", "support")}</span><a href={SPONSOR} style={{ color: "#EDEDED" }}>GitHub Sponsors ♥</a></div>
