@@ -126,9 +126,9 @@ window.SITE = {
     },
     {
       id: "1clue-launch", tag: "LAUNCH", year: "2024",
-      titleEN: "Founded 1CLue Puzzles game studio",
-      titleRU: "Основал игровую студию 1CLue Puzzles",
-      orgEN: "1CLue Puzzles", orgRU: "1CLue Puzzles",
+      titleEN: "Founded 1Clue Puzzles game studio",
+      titleRU: "Основал игровую студию 1Clue Puzzles",
+      orgEN: "1Clue Puzzles", orgRU: "1Clue Puzzles",
       url: "company-1clue.html",
     },
     {
@@ -217,8 +217,8 @@ window.SITE = {
     },
     {
       id: "1clue",
-      name: "1CLue Puzzles",
-      org: "1CLue Puzzles",
+      name: "1Clue Puzzles",
+      org: "1Clue Puzzles",
       periodEN: "2024 — 2025",
       periodRU: "2024 — 2025",
       roleEN: "Founder",
@@ -385,7 +385,7 @@ window.SITE = {
     { period: "2013—2016", role: "CTO", org: "CS-Cart", noteEN: "Three products in parallel. Marketplace 1000+ add-ons. Releases: 1 week → 1 day.", noteRU: "Три продукта параллельно. Маркетплейс 1000+ аддонов. Релизы: неделя → день." },
     { period: "2016—2019", role: "CPO", org: "CS-Cart", noteEN: "Product direction: multi-vendor, B2B edition, marketplace.", noteRU: "Продуктовое направление: мультивендор, B2B-редакция, маркетплейс." },
     { period: "2016—2023", role: "CEO", org: "CS-Cart", noteEN: "50,000+ licenses worldwide. Revenue ×3. 2500+ marketplace items. Subscription transition: support revenue +450%.", noteRU: "50 000+ лицензий по миру. Выручка ×3. 2500+ позиций в маркете. Переход на подписку: выручка поддержки +450%." },
-    { period: "2024—2025", role: "Founder", org: "1CLue Puzzles", noteEN: "Mobile puzzle games studio. 9 prototypes, AI workflow, strategic partnership.", noteRU: "Студия мобильных игр. 9 прототипов, AI workflow, стратегическое партнёрство." },
+    { period: "2024—2025", role: "Founder", org: "1Clue Puzzles", noteEN: "Mobile puzzle games studio. 9 prototypes, AI workflow, strategic partnership.", noteRU: "Студия мобильных игр. 9 прототипов, AI workflow, стратегическое партнёрство." },
     { period: "2025—now", role: "CGO", org: "Co.Actor", noteEN: "AI content engine for LinkedIn.", noteRU: "AI-движок для контента в LinkedIn." },
     { period: "2026—now", role: "Tech & Sales Advisor", org: "Smart Ranking", noteEN: "Tech processes, infrastructure, KB, team tech culture, sales funnel.", noteRU: "Техпроцессы, инфраструктура, KB, техкультура команды, воронка продаж." },
   ],

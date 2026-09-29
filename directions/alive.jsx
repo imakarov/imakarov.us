@@ -468,14 +468,14 @@ const Ticker = ({ lang }) => {
     "● Сейчас: эдвайз в Smart Ranking",
     "▲ Шипаю v2 SwipeScan",
     "◆ CGO в Co.Actor — AI-контент в LinkedIn",
-    "★ 1CLue Puzzles — daily streak",
+    "★ 1Clue Puzzles — daily streak",
     "▶ Telegram канал — обновления каждую неделю",
     "■ SLP · Rev Guild",
   ] : [
     "● Now: advising Smart Ranking",
     "▲ Shipping SwipeScan v2",
     "◆ CGO at Co.Actor — AI content for LinkedIn",
-    "★ 1CLue Puzzles — daily streak live",
+    "★ 1Clue Puzzles — daily streak live",
     "▶ Telegram channel updates weekly",
     "■ Communities: SLP · Rev Guild",
   ];

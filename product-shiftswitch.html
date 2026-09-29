@@ -68,7 +68,7 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-<script src="data/site.js?v=20260928-1"></script>
+<script src="data/site.js?v=20260929-1"></script>
 <script type="text/babel" src="components/product-page.jsx?v=20260928-2"></script>
 
 <script type="text/babel">
@@ -175,6 +175,11 @@ const Page = () => {
         <Card h={t("2 · Нажимаете Shift", "2 · Tap Shift")}>{t("Не та раскладка? Нажмите и отпустите Shift, больше ничего. Shift с буквой и долгое удержание игнорируются.", "Wrong layout? Press and release Shift, nothing else. Shift+letter or a long hold are ignored.")}</Card>
         <Card h={t("3 · Готово", "3 · Done")}>{t("Слово перепечатано в другой раскладке, раскладка переключена. Можно сразу печатать дальше. Ещё раз Shift — отмена.", "The word is retyped in the other layout and the layout switches. Keep typing right away. Tap again to undo.")}</Card>
       </div>
+      <div className="ss-card" style={{ marginTop: 16 }}>
+        <h3>{t("Выделенный текст", "Selected text")}</h3>
+        <p>{t("Выделите текст в поле ввода — в браузере, редакторе, мессенджере — и нажмите Shift: весь фрагмент перепечатается в другой раскладке и останется выделенным (Ghbdtn, vbh! → Привет, мир!). Если выделения нет или приложение его не сообщает, исправляется последнее слово. Автодополнение во время набора за выделение не принимается, в терминале функция отключена.",
+               "Select text in a field — browser, editor, messenger — and tap Shift: the whole fragment is retyped in the other layout and stays selected (Ghbdtn, vbh! → Привет, мир!). No selection, or an app that doesn't report it — the last word is fixed instead. Inline autocomplete while typing is never taken for a selection; terminals are excluded.")}</p>
+      </div>
     </ProdSection>
 
     <ProdSection num="03" title={t("Установка", "Install")} accent={accent}>
@@ -211,7 +216,7 @@ const Page = () => {
     <ProdSection num="06" title={t("Статус", "Status")} accent={accent}>
       <div className="mono" style={{ fontSize: 13, color: "#B4B4B4", maxWidth: 720 }}>
         <div className="ss-row"><span>{t("платформа", "platform")}</span><span>macOS 13+ · Apple Silicon · Intel</span></div>
-        <div className="ss-row"><span>{t("статус", "status")}</span><span style={{ color: accent }}>● v1.0.2 · {t("бесплатно", "free")}</span></div>
+        <div className="ss-row"><span>{t("статус", "status")}</span><span style={{ color: accent }}>● v1.1.0 · {t("бесплатно", "free")}</span></div>
         <div className="ss-row"><span>{t("лицензия", "license")}</span><span>MIT, open source</span></div>
         <div className="ss-row"><span>{t("код", "source")}</span><a href={REPO} style={{ color: "#EDEDED" }}>github.com/imakarov/shiftswitch</a></div>
         <div className="ss-row"><span>{t("поддержка", "support")}</span><a href={SPONSOR} style={{ color: "#EDEDED" }}>GitHub Sponsors ♥</a></div>
